@@ -8,6 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class UserDTOConverter {
     private final ModelMapper modelMapper;
@@ -19,6 +22,15 @@ public class UserDTOConverter {
 
     public UserDTO convertUserToUserDTO(User user) {
         return modelMapper.map(user, UserDTO.class);
+    }
+
+    public List<UserDTO> convertManyUsersToUsersDTO(List<User> userList) {
+        List<UserDTO> userDTOList = new ArrayList<>();
+        for (User user : userList) {
+            UserDTO userDTO = convertUserToUserDTO(user);
+            userDTOList.add(userDTO);
+        }
+        return userDTOList;
     }
 
     public User convertUserDTOToUser(UserDTO userDTO) {
