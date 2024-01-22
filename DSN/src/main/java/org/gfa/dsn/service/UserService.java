@@ -6,9 +6,6 @@ import org.gfa.dsn.dto.UserDTO;
 import org.gfa.dsn.model.User;
 import org.gfa.dsn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +15,13 @@ import java.util.List;
 public class UserService {
     private final UserDTOConverter userDTOConverter;
     private final UserRepository userRepository;
-    private AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
 
 
     @Autowired
-    public UserService(UserDTOConverter userDTOConverter, UserRepository userRepository, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
+    public UserService(UserDTOConverter userDTOConverter, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userDTOConverter = userDTOConverter;
         this.userRepository = userRepository;
-        this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
     }
 
