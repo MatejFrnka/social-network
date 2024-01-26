@@ -1,9 +1,6 @@
 package org.gfa.dsn.controller;
 
-import org.gfa.dsn.dto.AuthRequestDTO;
-import org.gfa.dsn.dto.JwtResponseDTO;
-import org.gfa.dsn.dto.SignUpDTO;
-import org.gfa.dsn.dto.UserDTO;
+import org.gfa.dsn.dto.*;
 import org.gfa.dsn.repository.UserRepository;
 import org.gfa.dsn.service.JwtService;
 import org.gfa.dsn.service.UserService;
@@ -45,15 +42,17 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody SignUpDTO signUpDTO) {
+    public ResponseEntity<ErrorDTO> registerUser(@RequestBody SignUpDTO signUpDTO) {
         if (userRepository.existsByUsername(signUpDTO.getUsername())) {
-            return new ResponseEntity<>("Username is already exist!", HttpStatus.BAD_REQUEST);
+            ErrorDTO errorDTO = new ErrorDTO(HttpStatus.BAD_REQUEST.value(), "Username already exists!", System.currentTimeMillis());
+            return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
         }
         if (userRepository.existsByEmail(signUpDTO.getEmail())) {
-            return new ResponseEntity<>("Email is already exist!", HttpStatus.BAD_REQUEST);
+            ErrorDTO errorDTO = new ErrorDTO(HttpStatus.BAD_REQUEST.value(), "Email already exists!", System.currentTimeMillis());
+            return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
         }
         userService.createAndSaveUser(signUpDTO);
-        return new ResponseEntity<>("User is registered successfully!", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
@@ -61,7 +60,7 @@ public class UserController {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.getUsername(), authRequestDTO.getPassword()));
         if (authentication.isAuthenticated()) {
             return JwtResponseDTO.builder()
-                    .accessToken(jwtService.GenerateToken(authRequestDTO.getUsername()).build();
+                    .accessToken(jwtService.generateToken(authRequestDTO.getUsername())).build();
         } else {
             throw new UsernameNotFoundException("invalid user request..!!");
         }

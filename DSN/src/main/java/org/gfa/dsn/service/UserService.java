@@ -17,7 +17,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-
     @Autowired
     public UserService(UserDTOConverter userDTOConverter, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userDTOConverter = userDTOConverter;

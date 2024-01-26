@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
-
     @Autowired
     private UserRepository userRepository;
+
 
     private static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         logger.debug("Entering in loadUserByUsername Method...");
         User user = userRepository.findByUsername(username);
-        if(user == null){
+        if (user == null) {
             logger.error("Username not found: " + username);
             throw new UsernameNotFoundException("could not found user..!!");
         }
