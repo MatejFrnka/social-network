@@ -45,8 +45,6 @@ public class UserService {
         user.setUsername(signUpDTO.getUsername());
         user.setEmail(signUpDTO.getEmail());
         user.setPassword(passwordEncoder.encode(signUpDTO.getPassword()));
-
         userRepository.save(user);
     }
-
 }
