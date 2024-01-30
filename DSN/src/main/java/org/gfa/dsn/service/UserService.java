@@ -1,6 +1,6 @@
 package org.gfa.dsn.service;
 
-import org.gfa.dsn.convert.UserDTOConverter;
+import org.gfa.dsn.convert.UserMapper;
 import org.gfa.dsn.dto.SignUpDTO;
 import org.gfa.dsn.dto.UserDTO;
 import org.gfa.dsn.model.User;
@@ -13,27 +13,27 @@ import java.util.List;
 
 @Service
 public class UserService {
-    private final UserDTOConverter userDTOConverter;
+    private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserDTOConverter userDTOConverter, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userDTOConverter = userDTOConverter;
+    public UserService(UserMapper userMapper, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userMapper = userMapper;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     public List<UserDTO> getAllUsers() {
         List<User> users = (List<User>) userRepository.findAll();
-        return userDTOConverter.convertManyUsersToUsersDTO(users);
+        return userMapper.convertManyUsersToUsersDTO(users);
     }
 
     public UserDTO getUser(Long id) {
         if (userRepository.findById(id).isEmpty()) {
             return null;
         } else {
-            return userDTOConverter.convertUserToUserDTO(userRepository.findById(id).get());
+            return userMapper.convertUserToUserDTO(userRepository.findById(id).get());
         }
     }
 

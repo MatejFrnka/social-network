@@ -17,14 +17,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
-public class UserController {
+public class UserRestController {
     private final UserService userService;
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
     @Autowired
-    public UserController(UserService userService, UserRepository userRepository, AuthenticationManager authenticationManager, JwtService jwtService) {
+    public UserRestController(UserService userService, UserRepository userRepository, AuthenticationManager authenticationManager, JwtService jwtService) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<ErrorDTO> registerUser(@RequestBody SignUpDTO signUpDTO) {
+    public ResponseEntity<?> registerUser(@RequestBody SignUpDTO signUpDTO) {
         if (userRepository.existsByUsername(signUpDTO.getUsername())) {
             ErrorDTO errorDTO = new ErrorDTO(HttpStatus.BAD_REQUEST.value(), "Username already exists!", System.currentTimeMillis());
             return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
@@ -56,11 +56,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public JwtResponseDTO AuthenticateAndGetToken(@RequestBody AuthRequestDTO authRequestDTO) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.getUsername(), authRequestDTO.getPassword()));
+    public JwtResponseDTO AuthenticateAndGetToken(@RequestBody LoginDTO loginDTO) {
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword()));
         if (authentication.isAuthenticated()) {
             return JwtResponseDTO.builder()
-                    .accessToken(jwtService.generateToken(authRequestDTO.getUsername())).build();
+                    .accessToken(jwtService.generateToken(loginDTO.getUsername())).build();
         } else {
             throw new UsernameNotFoundException("invalid user request..!!");
         }

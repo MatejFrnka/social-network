@@ -1,5 +1,8 @@
 package org.gfa.dsn.dto;
 
+import lombok.Data;
+
+@Data
 public class ErrorDTO {
     private int status;
     private String message;

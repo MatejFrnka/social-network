@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class UserDTOConverter {
+public class UserMapper {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public UserDTOConverter(ModelMapper modelMapper) {
+    public UserMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
