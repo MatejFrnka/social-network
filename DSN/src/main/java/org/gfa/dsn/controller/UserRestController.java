@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@Api(tags = "Endpoints")
 public class UserRestController {
     private final UserService userService;
     private final UserRepository userRepository;
@@ -32,16 +33,19 @@ public class UserRestController {
     }
 
     @GetMapping("/users")
+    @ApiOperation(value = "Get All Users")
     public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/users/{id}")
+    @ApiOperation(value = "Get Specific User By Id")
     public UserDTO getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
 
     @PostMapping("/signup")
+    @ApiOperation(value = "Register User")
     public ResponseEntity<?> registerUser(@RequestBody SignUpDTO signUpDTO) {
         if (userRepository.existsByUsername(signUpDTO.getUsername())) {
             ErrorDTO errorDTO = new ErrorDTO(HttpStatus.BAD_REQUEST.value(), "Username already exists!", System.currentTimeMillis());
@@ -56,6 +60,7 @@ public class UserRestController {
     }
 
     @PostMapping("/login")
+    @ApiOperation(value = "Login User")
     public JwtResponseDTO AuthenticateAndGetToken(@RequestBody LoginDTO loginDTO) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword()));
         if (authentication.isAuthenticated()) {
