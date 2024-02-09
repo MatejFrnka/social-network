@@ -1,9 +1,9 @@
 import React from 'react';
-import Image from 'next/image'; // استيراد مكون Image من Next.js
-import profileImage from '../../public/images/74130270.png'; // استيراد الصورة
+import Image from 'next/image';
+import profileImage from '../../public/images/profile_picture.png';
 import '../styles/Index_Page_Home_style.css';
 
-const IndexPage: React.FC = () => {
+export default function IndexPage() {
   return (
       <html lang="en">
       <head>
@@ -79,7 +79,7 @@ const IndexPage: React.FC = () => {
             <div className="profile-stories">
               <article className="story">
                 <aside className="user-thumb">
-                  {/* استخدم مكون Image بدلاً من العنصر <img> */}
+
                   <Image
                       src={profileImage}
                       alt="Profile Image"
@@ -129,7 +129,7 @@ const IndexPage: React.FC = () => {
                               className="img-circle"
                           />
                           <img
-                              src="../../public/images/74130270.png"
+                              src="../../public/images/profile_picture.png"
                               alt=""
                               className="img-circle"
                               width="30"
@@ -169,7 +169,7 @@ const IndexPage: React.FC = () => {
                               className="img-circle"
                           />
                           <img
-                              src="../../public/images/74130270.png"
+                              src="../../public/images/profile_picture.png"
                               alt=""
                               className="img-circle"
                               width="30"
@@ -208,7 +208,7 @@ const IndexPage: React.FC = () => {
                               className="img-circle"
                           />
                           <img
-                              src="../../public/images/74130270.png"
+                              src="../../public/images/profile_picture.png"
                               alt=""
                               className="img-circle"
                               width="30"
@@ -247,7 +247,7 @@ const IndexPage: React.FC = () => {
                               className="img-circle"
                           />
                           <img
-                              src="../../public/images/74130270.png"
+                              src="../../public/images/profile_picture.png"
                               alt=""
                               className="img-circle"
                               width="30"
@@ -277,5 +277,4 @@ const IndexPage: React.FC = () => {
   );
 };
 
-export default IndexPage;
 
