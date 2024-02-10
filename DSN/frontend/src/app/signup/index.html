@@ -39,7 +39,7 @@
 
 <script>
     document.getElementById('signupForm').addEventListener('submit', async function(event) {
-        event.preventDefault(
+        event.preventDefault();
 
         const firstName = document.getElementById('firstName').value;
         const lastName = document.getElementById('lastName').value;
@@ -58,6 +58,8 @@
             if (response.ok) {
                 const data = await response.json();
                 console.log('Registration successful:', data);
+
+                // window.location.href = '/feed';
             } else {
                 console.error('Registration failed:', response.statusText)
             }
