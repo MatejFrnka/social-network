@@ -1,4 +1,5 @@
 const DevelopersSaySection = () => {
+
     return (
         <section className="DevelopersSay" id="DevelopersSay">
             <h2 className="title">What Our Developers Say</h2>
