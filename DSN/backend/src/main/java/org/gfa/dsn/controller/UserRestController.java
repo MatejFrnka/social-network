@@ -1,5 +1,7 @@
 package org.gfa.dsn.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.gfa.dsn.dto.*;
 import org.gfa.dsn.repository.UserRepository;
 import org.gfa.dsn.service.JwtService;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@Tag(name = "User controller")
 public class UserRestController {
     private final UserService userService;
     private final UserRepository userRepository;
@@ -31,16 +34,19 @@ public class UserRestController {
         this.jwtService = jwtService;
     }
 
+    @Operation(summary = "Get all users")
     @GetMapping("/users")
     public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
+    @Operation(summary = "Get user by id")
     @GetMapping("/users/{id}")
     public UserDTO getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
 
+    @Operation(summary = "Sign up a user")
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignUpDTO signUpDTO) {
         if (userRepository.existsByUsername(signUpDTO.getUsername())) {
@@ -55,6 +61,7 @@ public class UserRestController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Login a user")
     @PostMapping("/login")
     public JwtResponseDTO AuthenticateAndGetToken(@RequestBody LoginDTO loginDTO) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword()));
