@@ -1,7 +1,7 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import Link from 'next/link'
 
 export default function LoginPage() {
     const [router, setRouter] = useState(null);
@@ -15,12 +15,6 @@ export default function LoginPage() {
         password: ''
     });
 
-    const handleRegisterClick = async () => {
-        if (router !== null) {
-            await router.push('http://localhost:3000/signup');
-        }
-    };
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
@@ -33,14 +27,14 @@ export default function LoginPage() {
             const loginForm = document.getElementById('loginForm');
             const handleSubmit = async (event: Event) => {
                 event.preventDefault();
-                const { username, password } = formData;
+                const {username, password} = formData;
                 try {
                     const response = await fetch('http://localhost:8080/api/v1/login', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ username, password }),
+                        body: JSON.stringify({username, password}),
                     });
 
                     if (response.ok) {
@@ -68,6 +62,7 @@ export default function LoginPage() {
             };
         }
     }, [formData, router]);
+
 
     return (
         <section className="bg-gray-50 min-h-screen flex items-center justify-center">
@@ -120,15 +115,14 @@ export default function LoginPage() {
                         <a href="#">Forgot your password?</a>
                     </div>
 
-                    {router && (
-                        <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">
-                            <p>Don&apos;t have an account?</p>
-                            <button onClick={handleRegisterClick}
-                                    className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">Register
-                            </button>
-                        </div>
-                    )}
+                    <div className="mt-6 text-xs py-4 text-[#002D74]">
+                        <p>
+                            Don&apos;t have an account?
+                            <a href="http://localhost:3000/signup"> Signup here</a>
+                        </p>
+                    </div>
                 </div>
+
 
                 <div className="md:block hidden w-1/2">
                     <Image src="/login-signup-banner.jpg" alt="image" width={307} height={507}

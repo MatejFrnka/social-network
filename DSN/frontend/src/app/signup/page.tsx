@@ -23,7 +23,7 @@ export default function SignupPage() {
         const handleSubmit = async (event: Event) => {
             event.preventDefault();
             try {
-                const response = await fetch('http://localhost:8080/api/v1/api/v1/signup', {
+                const response = await fetch('http://localhost:8080/api/v1/signup', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -33,7 +33,6 @@ export default function SignupPage() {
                 if (response.ok) {
                     const data = await response.json();
                     console.log('Registration successful:', data);
-                    // Redirect logic can be implemented here using Next.js router
                 } else {
                     console.error('Registration failed:', response.statusText);
                 }
