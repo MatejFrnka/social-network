@@ -1,6 +1,7 @@
 package org.gfa.dsn.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.gfa.dsn.dto.*;
 import org.gfa.dsn.repository.UserRepository;
@@ -35,12 +36,14 @@ public class UserRestController {
     }
 
     @Operation(summary = "Get all users")
+    @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/users")
     public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @Operation(summary = "Get user by id")
+    @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/users/{id}")
     public UserDTO getUser(@PathVariable Long id) {
         return userService.getUser(id);
