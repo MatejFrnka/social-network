@@ -1,12 +1,14 @@
 package org.gfa.dsn.service;
 
 import org.gfa.dsn.convert.PostMapper;
+import org.gfa.dsn.dto.NewPostDTO;
 import org.gfa.dsn.dto.PostDTO;
 import org.gfa.dsn.model.Post;
 import org.gfa.dsn.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,6 +24,7 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
+    // TODO currently receiving 403 forbidden when testing
     /**
      * Retrieves a PostDTO object corresponding to the given ID.
      *
@@ -36,7 +39,7 @@ public class PostService {
         return postOptional.map(post -> postMapper.convertPostToPostDTO(post)).orElse(null);
     }
 
-
+    // TODO currently receiving 403 forbidden when testing
     /**
      * Retrieves all posts and converts them to a list of PostDTO objects.
      *
@@ -54,15 +57,16 @@ public class PostService {
      * Creates a new post using the information provided in the given {@code PostDTO} object
      * and saves it to the database.
      *
-     * @param postDTO The {@code PostDTO} object containing the information for the new post.
+     * @param newPostDTO The {@code PostDTO} object containing the information for the new post.
      * @throws IllegalArgumentException if {@code postDTO} is null.
      */
-    public void createAndSaveUser(PostDTO postDTO) {
+    public void createAndSavePost(NewPostDTO newPostDTO) {
         Post post = new Post();
 
-        post.setUserId(postDTO.getUserId());
-        post.setTitle(postDTO.getTitle());
-        post.setBody(postDTO.getBody());
+        post.setUserId(newPostDTO.getUserId());
+        post.setTitle(newPostDTO.getTitle());
+        post.setBody(newPostDTO.getBody());
+        post.setCreatedAt(LocalDateTime.now());
 
         postRepository.save(post);
     }
