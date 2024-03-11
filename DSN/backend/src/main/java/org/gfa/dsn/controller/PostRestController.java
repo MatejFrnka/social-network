@@ -59,6 +59,7 @@ public class PostRestController {
      * @return A response entity indicating success or failure of the operation.
      */
     @Operation(summary = "Create new post")
+    @SecurityRequirement(name = "Bearer Authentication")
     @PostMapping("/posts/create")
     public ResponseEntity<?> createNewPost(@RequestBody NewPostDTO newPostDTO) {
         try {

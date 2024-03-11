@@ -1,10 +1,12 @@
 package org.gfa.dsn.service;
 
 import org.gfa.dsn.convert.PostMapper;
+import org.gfa.dsn.model.User;
 import org.gfa.dsn.dto.NewPostDTO;
 import org.gfa.dsn.dto.PostDTO;
 import org.gfa.dsn.model.Post;
 import org.gfa.dsn.repository.PostRepository;
+import org.gfa.dsn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,36 +17,22 @@ import java.util.stream.Collectors;
 
 @Service
 public class PostService {
-    PostMapper postMapper;
-    PostRepository postRepository;
+    private final PostMapper postMapper;
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public PostService(PostMapper postMapper, PostRepository postRepository) {
+    public PostService(PostMapper postMapper, PostRepository postRepository, UserRepository userRepository) {
         this.postMapper = postMapper;
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
     }
 
-    // TODO currently receiving 403 forbidden when testing
-    /**
-     * Retrieves a PostDTO object corresponding to the given ID.
-     *
-     * @param id The ID of the post to retrieve.
-     * @return An {@code Optional} containing the {@code PostDTO} if found, or an empty {@code Optional} if no post with the given ID exists.
-     * If a post is found, it is converted to a {@code PostDTO} using the configured {@code PostMapper}.
-     * Returns {@code null} if no post is found with the given ID.
-     * @throws IllegalArgumentException if {@code id} is null.
-     */
     public PostDTO getPost(Long id) {
         Optional<Post> postOptional = postRepository.findById(id);
-        return postOptional.map(post -> postMapper.convertPostToPostDTO(post)).orElse(null);
+        return postOptional.map(postMapper::convertPostToPostDTO).orElse(null);
     }
 
-    // TODO currently receiving 403 forbidden when testing
-    /**
-     * Retrieves all posts and converts them to a list of PostDTO objects.
-     *
-     * @return A list of {@code PostDTO} objects representing all posts.
-     */
     public List<PostDTO> getAllPosts() {
         List<Post> posts = (List<Post>) postRepository.findAll();
         return posts.stream()
@@ -52,23 +40,22 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
+    public void createAndSavePost(NewPostDTO newPostDTO) throws Exception {
+        if (newPostDTO == null) {
+            throw new IllegalArgumentException("NewPostDTO cannot be null");
+        }
 
-    /**
-     * Creates a new post using the information provided in the given {@code PostDTO} object
-     * and saves it to the database.
-     *
-     * @param newPostDTO The {@code PostDTO} object containing the information for the new post.
-     * @throws IllegalArgumentException if {@code postDTO} is null.
-     */
-    public void createAndSavePost(NewPostDTO newPostDTO) {
+        Optional<User> user = userRepository.findById(newPostDTO.getUserId());
+        if (user.isEmpty()) {
+            throw new Exception("User not found.");
+        }
         Post post = new Post();
 
-        post.setUserId(newPostDTO.getUserId());
+        post.setUser(user.get());
         post.setTitle(newPostDTO.getTitle());
         post.setBody(newPostDTO.getBody());
         post.setCreatedAt(LocalDateTime.now());
 
         postRepository.save(post);
     }
-
 }
