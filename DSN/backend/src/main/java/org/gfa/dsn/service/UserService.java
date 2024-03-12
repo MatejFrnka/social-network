@@ -8,7 +8,6 @@ import org.gfa.dsn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -35,6 +34,12 @@ public class UserService {
         } else {
             return userMapper.convertUserToUserDTO(userRepository.findById(id).get());
         }
+    }
+
+    public Long getUserIdByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return user.getId();
     }
 
     public void createAndSaveUser(SignUpDTO signUpDTO) {
