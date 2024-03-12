@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing user-related endpoints.
+ */
 @RestController
 @RequestMapping("/api/v1")
 @Tag(name = "User controller")
@@ -35,6 +38,11 @@ public class UserRestController {
         this.jwtService = jwtService;
     }
 
+    /**
+     * Retrieves all users in the system.
+     *
+     * @return A list of UserDTO objects representing all users.
+     */
     @Operation(summary = "Get all users")
     @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/users")
@@ -42,6 +50,12 @@ public class UserRestController {
         return userService.getAllUsers();
     }
 
+    /**
+     * Retrieves a user by their ID.
+     *
+     * @param id The ID of the user to retrieve.
+     * @return The UserDTO object representing the user with the specified ID.
+     */
     @Operation(summary = "Get user by id")
     @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/users/{id}")
@@ -49,6 +63,12 @@ public class UserRestController {
         return userService.getUser(id);
     }
 
+    /**
+     * Registers a new user.
+     *
+     * @param signUpDTO The SignUpDTO object containing user registration data.
+     * @return A ResponseEntity indicating success or failure of the registration process.
+     */
     @Operation(summary = "Sign up a user")
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignUpDTO signUpDTO) {
@@ -64,6 +84,12 @@ public class UserRestController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * Authenticates a user and generates a JWT token.
+     *
+     * @param loginDTO The LoginDTO object containing user login credentials.
+     * @return A JwtResponseDTO containing the JWT token.
+     */
     @Operation(summary = "Login a user")
     @PostMapping("/login")
     public JwtResponseDTO AuthenticateAndGetToken(@RequestBody LoginDTO loginDTO) {
