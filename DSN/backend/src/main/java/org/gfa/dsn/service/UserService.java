@@ -3,6 +3,7 @@ package org.gfa.dsn.service;
 import org.gfa.dsn.convert.UserMapper;
 import org.gfa.dsn.dto.SignUpDTO;
 import org.gfa.dsn.dto.UserDTO;
+import org.gfa.dsn.exceptions.UserNotFoundException;
 import org.gfa.dsn.model.User;
 import org.gfa.dsn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class UserService {
      * @return The ID of the user.
      * @throws IllegalArgumentException if the user is not found.
      */
-    public Long getUserIdByUsername(String username) {
+    public Long getUserIdByUsername(String username) throws UserNotFoundException {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         return user.getId();
