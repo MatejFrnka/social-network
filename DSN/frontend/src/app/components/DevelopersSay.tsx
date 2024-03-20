@@ -1,18 +1,18 @@
-const DevelopersSaySection = () => {
-
+import Image from 'next/image'
+const DevelopersSay = () => {
     return (
         <section className="DevelopersSay" id="DevelopersSay">
             <h2 className="title">What Our Developers Say</h2>
             <div className="content">
                 <div className="DevelopersSay-card">
                     <div className="DevelopersSay-image">
-                        <img src="../images/background.jpg" alt="Developer" />
+                        <Image src="/app/images/background.jpg" alt="Developer" width={500} height={500}/>
                     </div>
                     <div className="DevelopersSay-info">
-                        <p className="DevelopersSay-category">Script writing</p>
+                        <p className="DevelopersSay-category"></p>
                         <strong className="DevelopersSay-title">
                             <span>Script writing</span>
-                            <a href="#" className="more-details">
+                            <a href="#more-details" className="more-details">
                                 More Details
                             </a>
                         </strong>
@@ -23,4 +23,4 @@ const DevelopersSaySection = () => {
     );
 };
 
-export default DevelopersSaySection;
+export default DevelopersSay;

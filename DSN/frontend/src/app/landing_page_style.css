@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-*{
+* {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
@@ -8,7 +8,7 @@
     scroll-behavior: smooth;
 }
 
-header{
+.header {
     background-color: #f0f0f0;
     width: 100%;
     position: fixed;
@@ -18,49 +18,55 @@ header{
     align-items: center;
     padding: 10px 200px;
 }
-.logo{
+
+.logo {
     text-decoration: none;
     color: #3a6cf4;
     text-transform: uppercase;
     font-weight: 700;
     font-size: 1.8em;
 }
-.navigation a{
+
+.navigation a {
     text-decoration: none;
     color: #3a6cf4;
     font-size: 1.1em;
     font-weight: 500;
     padding-left: 30px;
 }
-.navigation a:hover{
+
+.navigation a:hover {
     color: #601cfc;
 }
-section{
+
+.section {
     padding: 100px 200px;
 }
-.main{
+
+.main {
     width: 100%;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: url(../images/background.jpg) no-repeat;
     background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background: url(images/background.jpg) no-repeat fixed center;
 }
-.main h2{
+
+.main h2 {
     color: #16d1a9;
     font-size: 1.4em;
     font-weight: 500;
 }
-.main h2 span{
+
+.main h2 span {
     display: inline-block;
     margin-top: 10px;
     color: #4e9eff;
     font-size: 2em;
     font-weight: 600;
 }
-.main h3{
+
+.main h3 {
     color: #aa0d0d;
     font-size: 1.5em;
     font-weight: 700;
@@ -68,29 +74,19 @@ section{
     margin-top: 10px;
     margin-bottom: 30px;
 }
-.main-btn{
-    color: #fff;
-    background-color: #3a6cf4;
-    text-decoration: none;
-    font-size: 1.1em;
-    font-weight: 600;
-    display: inline-block;
-    padding: 0.9375em 2.1875em;
-    letter-spacing: 1px;
-    border-radius: 15px;
-    margin-bottom: 40px;
-    transition: 0.7s ease;
-}
-.main-btn:hover{
+
+.main-btn:hover {
     background-color: #0a49f6;
     transform: scale(1.1);
 }
-.social-icons a{
+
+.social-icons a {
     color: #fff;
     font-size: 1.7em;
     padding-right: 30px;
 }
-.title{
+
+.title {
     display: flex;
     justify-content: center;
     color: #3a6cf4;
@@ -98,13 +94,15 @@ section{
     font-weight: 800;
     margin-bottom: 30px;
 }
-.content{
+
+.content {
     display: flex;
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
 }
-.card{
+
+.card {
     background-color: #fff;
     width: 21.25em;
     box-shadow: 0 5px 25px rgba(1, 1, 1, 15%);
@@ -115,10 +113,11 @@ section{
     transition: 0.7s ease;
 }
 
-.card:hover{
+.card:hover {
     transform: scale(1.1);
 }
-.icon{
+
+.icon {
     color: #3a6cf4;
     font-size: 8em;
     text-align: center;
@@ -128,20 +127,23 @@ section{
     text-align: center;
 }
 
-.info h3{
+.info h3 {
     color: #3a6cf4;
     font-size: 1.2em;
     font-weight: 700;
     margin: 10px;
 }
-.DevelopersSay{
+
+.DevelopersSay {
     background-color: #000016;
 }
-.DevelopersSay .content{
+
+.DevelopersSay .content {
     margin-top: 30px;
 
 }
-.DevelopersSay-card{
+
+.DevelopersSay-card {
     background-color: #fff;
     border: 1px solid #fff;
     min-height: 14em;
@@ -151,52 +153,60 @@ section{
     margin: 20px;
     transition: 0.7s ease;
 }
-.DevelopersSay-card:hover{
+
+.DevelopersSay-card:hover {
     transform: scale(1.1);
 }
 
-.DevelopersSay-card:hover .DevelopersSay-image{
+.DevelopersSay-card:hover .DevelopersSay-image {
     opacity: 0.9;
 }
 
-.DevelopersSay-image img{
+.DevelopersSay-image img {
     width: 100%;
 
 }
-.DevelopersSay-info{
+
+.DevelopersSay-info {
     padding: 1em;
 
 }
-.DevelopersSay-category{
+
+.DevelopersSay-category {
     font-size: 0.8em;
     color: #000;
 }
-.DevelopersSay-title{
+
+.DevelopersSay-title {
     display: flex;
     justify-content: space-between;
     text-transform: uppercase;
     font-weight: 800;
     margin-top: 10px;
 }
-.more-details{
+
+.more-details {
     text-decoration: none;
     color: #3a6cf4;
 }
 
-.more-details:hover{
+.more-details:hover {
     color: #601cfc;
 }
-.contact .icon{
+
+.contact .icon {
     font-size: 4.5em;
 }
 
-.contact .info h3{
+.contact .info h3 {
     color: #000;
 }
-.contact .info p{
+
+.contact .info p {
     font-size: 1.3em;
 }
-.footer{
+
+.footer {
     background-color: #000016;
     color: #fff;
     padding: 2em;
@@ -209,52 +219,57 @@ section{
     font-weight: 600;
 }
 
-.footer-title span{
+.footer-title span {
     color: #3a6cf4;
 }
 
-@media (max-width:1023px){
-    header{
+@media (max-width: 1023px) {
+    .header {
         padding: 12px 20px;
     }
-    .navigation a{
+
+    .navigation a {
         padding-left: 10px;
     }
-    .title{
+
+    .title {
         font-size: 1.8em;
     }
-    section{
+
+    .section {
         padding: 80px 20px;
     }
-    .main-content h2{
+
+    .main-content h2 {
         font-size: 1em;
     }
-    .main-content h3{
+
+    .main-content h3 {
         font-size: 1.6em;
     }
 
-    .content{
+    .content {
         flex-direction: column;
         align-items: center;
     }
 }
 
-@media (max-width:641px){
-    body{
+@media (max-width: 641px) {
+    .body {
         font-size: 12px;
     }
 
-    .main-content h2{
+    .main-content h2 {
         font-size: 0.8em;
     }
 
-    .main-content h3{
+    .main-content h3 {
         font-size: 1.4em;
     }
 }
 
-@media (max-width:300px){
-    body{
+@media (max-width: 300px) {
+    .body {
         font-size: 10px;
     }
 

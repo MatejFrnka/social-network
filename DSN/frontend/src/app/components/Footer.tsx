@@ -1,6 +1,8 @@
+
+
 const Footer = () => {
     return (
-        <footer className="footer">
+        <footer className="footer" id={"Footer"}>
             <p className="footer-title">Copyrights @ <span>GA</span></p>
             <div className="social-icons">
                 <a href="#"><i className="fa-brands fa-linkedin"></i></a>
