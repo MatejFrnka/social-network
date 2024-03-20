@@ -6,7 +6,6 @@ const DevelopersSay = () => {
             <div className="content">
                 <div className="DevelopersSay-card">
                     <div className="DevelopersSay-image">
-                        <Image src="/app/images/background.jpg" alt="Developer" width={500} height={500}/>
                     </div>
                     <div className="DevelopersSay-info">
                         <p className="DevelopersSay-category"></p>
