@@ -2,6 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import profileImage from '../../public/images/profile_picture.png';
 import '../styles/Index_Page_Home_style.css';
+import Link from "next/link";
+
 
 export default function IndexPage() {
   return (
@@ -21,12 +23,18 @@ export default function IndexPage() {
           DeveloperHub
         </a>
         <nav className="navigation">
-          <a href="#My file">My file</a>
-          <a href="#Messages">Messages</a>
-          <a href="#Notifications">Notifications</a>
+          <Link href="/profile_about">
+            My Profile
+          </Link>
+          <Link href="/#Messages">
+            Messages
+          </Link>
+          <Link href="/#Notifications">
+            Notifications
+          </Link>
         </nav>
       </header>
-      <br />
+      <br/>
       <div className="container">
         <div className="profile-env">
           <section className="profile-feed">
@@ -276,5 +284,3 @@ export default function IndexPage() {
       </html>
   );
 };
-
-
